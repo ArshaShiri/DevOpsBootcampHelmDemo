@@ -73,4 +73,6 @@ Under volumes we can see 3 persistent components:
 
 For each of the 3 pods a physical storage was created due to the vlaues that we provided in the yaml file.
 
+## Deploy MongoExpress
 
+Since there would be one pod and 1 service, the configuration file is manually created.
