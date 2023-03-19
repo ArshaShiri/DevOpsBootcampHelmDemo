@@ -43,5 +43,8 @@ We can either create all the cofiguration files ourself or use a bundle of confi
         # bitnami/mongodb        	13.9.1       	6.0.5      	MongoDB(R) is a relational open source NoSQL da...
         # bitnami/mongodb-sharded	6.3.1        	6.0.5      	MongoDB(R) is an open source NoSQL database tha...
 
+We can find the parameters that we can modify to set our MongoDB [here](https://github.com/bitnami/charts/tree/main/bitnami/mongodb).
 
-    
+![image](https://user-images.githubusercontent.com/18715119/226177961-5dd23851-30fe-4c87-a699-aba02dd257ad.png)
+
+We set `architecture` parameter to `replicaset` since we want multiple replicas of the database. We can also use `auth.rootPassword` to set the root password.
