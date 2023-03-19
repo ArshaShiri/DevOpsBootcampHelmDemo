@@ -119,4 +119,4 @@ We can define ingress rules in the cluster now. Ingress controller uses some clo
 * CluterIP: Internal Service
 * LoadBalancer: Accessible Externally
 
-We now create ingress rules to be able to access it from the browser.
+We now create ingress rules to be able to access it from the browser. Inside the node balancer we can get the host name.
