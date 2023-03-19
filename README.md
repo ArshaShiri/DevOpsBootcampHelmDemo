@@ -87,3 +87,36 @@ Since there would be one pod and 1 service, the configuration file is manually c
         # mongodb-1                        1/1     Running   0          17m
         # mongodb-2                        1/1     Running   0          17m
         # mongodb-arbiter-0                1/1     Running   0          18m
+        
+## Deploy Ingress Controller
+
+We will use helam charts for the ingress controller again. Particularly `nginx-ingress contoller` from [here](https://github.com/bitnami/charts/tree/main/bitnami/nginx-ingress-controller).
+
+    helm install nginx-ingress bitnami/nginx-ingress-controller --set controller.publishService.enabled=true
+    kubectl get pod
+        # NAME                                                              READY   STATUS    RESTARTS   AGE
+        # mongo-express-6c7b5d5ff8-pvcpj                                    1/1     Running   0          4h37m
+        # mongodb-0                                                         1/1     Running   0          4h55m
+        # mongodb-1                                                         1/1     Running   0          4h54m
+        # mongodb-2                                                         1/1     Running   0          4h53m
+        # mongodb-arbiter-0                                                 1/1     Running   0          4h55m
+        # nginx-ingress-nginx-ingress-controller-596db8d78b-2tggn           1/1     Running   0          28s
+        # nginx-ingress-nginx-ingress-controller-default-backend-755chfcm   1/1     Running   0          28s
+
+We can define ingress rules in the cluster now. Ingress controller uses some clouad-native node balancers. The node balancers gives the external IP address.
+
+![image](https://user-images.githubusercontent.com/18715119/226205011-d7f98eae-e4f9-470a-a32c-6fc6dedb5d5e.png)
+
+    kubectl get svc
+        # NAME                                                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
+        # kubernetes                                               ClusterIP      10.128.0.1       <none>           443/TCP                      7h24m
+        # mongo-express-service                                    ClusterIP      10.128.199.215   <none>           8081/TCP                     4h40m
+        # mongodb-arbiter-headless                                 ClusterIP      None             <none>           27017/TCP                    4h58m
+        # mongodb-headless                                         ClusterIP      None             <none>           27017/TCP                    4h58m
+        # nginx-ingress-nginx-ingress-controller                   LoadBalancer   10.128.33.114    139.144.159.61   80:30489/TCP,443:30937/TCP   3m25s
+        # nginx-ingress-nginx-ingress-controller-default-backend   ClusterIP      10.128.223.114   <none>           80/TCP                       3m25s
+
+* CluterIP: Internal Service
+* LoadBalancer: Accessible Externally
+
+We now create ingress rules to be able to access it from the browser.
