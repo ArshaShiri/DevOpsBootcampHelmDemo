@@ -47,4 +47,4 @@ We can find the parameters that we can modify to set our MongoDB [here](https://
 
 ![image](https://user-images.githubusercontent.com/18715119/226177961-5dd23851-30fe-4c87-a699-aba02dd257ad.png)
 
-We set `architecture` parameter to `replicaset` since we want multiple replicas of the database. We can also use `auth.rootPassword` to set the root password.
+We set `architecture` parameter to `replicaset` since we want multiple replicas of the database. We can also use `auth.rootPassword` to set the root password. To set these parameters we need a values file: `test-mongodb-values.yaml`
