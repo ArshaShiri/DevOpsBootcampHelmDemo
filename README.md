@@ -62,6 +62,7 @@ We set `architecture` parameter to `replicaset` since we want multiple replicas 
     kubectl get all
     
     kubectl get secret
+    kubectl get secret mongodb -o yaml
     
 The worker nodes can be seen in Linode:
 
@@ -75,4 +76,14 @@ For each of the 3 pods a physical storage was created due to the vlaues that we 
 
 ## Deploy MongoExpress
 
-Since there would be one pod and 1 service, the configuration file is manually created.
+Since there would be one pod and 1 service, the configuration file is manually created in `test-mongo-express.yaml`.
+
+    kubectl apply -f test-mongo-express.yaml
+
+    kubectl get pod
+        # NAME                             READY   STATUS    RESTARTS   AGE
+        # mongo-express-6c7b5d5ff8-pvcpj   1/1     Running   0          22s
+        # mongodb-0                        1/1     Running   0          18m
+        # mongodb-1                        1/1     Running   0          17m
+        # mongodb-2                        1/1     Running   0          17m
+        # mongodb-arbiter-0                1/1     Running   0          18m
