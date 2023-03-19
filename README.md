@@ -123,3 +123,21 @@ We now create ingress rules to be able to access it from the browser. Inside the
 
 ![image](https://user-images.githubusercontent.com/18715119/226205327-8fb24557-06bb-495f-8bba-a7a9eb71d6f2.png)
 
+    kubectl apply -f test-ingress.yaml
+    kubectl get ingress
+        # NAME              CLASS    HOSTS                                     ADDRESS          PORTS   AGE
+        # minimal-ingress   <none>   *                                                          80      3m15s
+        # mongo-express     nginx    139-144-159-61.ip.linodeusercontent.com   178.79.157.134   80      65s
+
+MongoExpress can be accessed from the browser now:
+
+![image](https://user-images.githubusercontent.com/18715119/226206574-aba72427-1e76-4566-9520-46a836e5fca4.png)
+
+Since we set data to persist, when pods are removed the data will not be lost.
+
+    kubectl scale --replicas=0 statefulset/mongodb
+    .
+    .
+    .
+    kubectl scale --replicas=3 statefulset/mongodb
+    # Data persists.
