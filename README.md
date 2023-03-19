@@ -120,3 +120,6 @@ We can define ingress rules in the cluster now. Ingress controller uses some clo
 * LoadBalancer: Accessible Externally
 
 We now create ingress rules to be able to access it from the browser. Inside the node balancer we can get the host name.
+
+![image](https://user-images.githubusercontent.com/18715119/226205327-8fb24557-06bb-495f-8bba-a7a9eb71d6f2.png)
+
