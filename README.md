@@ -47,4 +47,30 @@ We can find the parameters that we can modify to set our MongoDB [here](https://
 
 ![image](https://user-images.githubusercontent.com/18715119/226177961-5dd23851-30fe-4c87-a699-aba02dd257ad.png)
 
-We set `architecture` parameter to `replicaset` since we want multiple replicas of the database. We can also use `auth.rootPassword` to set the root password. To set these parameters we need a values file: `test-mongodb-values.yaml`
+We set `architecture` parameter to `replicaset` since we want multiple replicas of the database. We can also use `auth.rootPassword` to set the root password. To set these parameters we need a values file: `test-mongodb-values.yaml`. Using that value file we can install MongoDB:
+
+    helm install mongodb --values test-mongodb-values.yaml bitnami/mongodb
+    
+    kubectl get pod
+        # NAME                READY   STATUS              RESTARTS   AGE
+        # mongodb-0           1/1     Running   0          2m3s
+        # mongodb-1           1/1     Running   0          77s
+        # mongodb-2           0/1     Running   0          25s
+        # mongodb-arbiter-0   1/1     Running   0          2m2s
+    
+    # We can get all created objects
+    kubectl get all
+    
+    kubectl get secret
+    
+The worker nodes can be seen in Linode:
+
+![image](https://user-images.githubusercontent.com/18715119/226184175-69ed6ce5-2434-40fb-b52f-f53f95f75222.png)
+
+Under volumes we can see 3 persistent components:
+
+![image](https://user-images.githubusercontent.com/18715119/226184287-5fbe591e-627c-44aa-adae-910305236e51.png)
+
+For each of the 3 pods a physical storage was created due to the vlaues that we provided in the yaml file.
+
+
